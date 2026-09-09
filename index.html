@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07152f">
+  <title>PROJECT ONE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-label="PROJECT ONE">🦋</div>
+        <div>
+          <strong>PROJECT ONE</strong>
+          <span>Smart Channel OS</span>
+        </div>
+      </div>
+      <button class="icon-btn" id="menuBtn" aria-label="منو">☰</button>
+    </header>
+
+    <main id="app">
+      <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+          <span class="eyebrow">SMART CHANNEL OS</span>
+          <h1>به PROJECT ONE<br>خوش آمدی 👋</h1>
+          <p>اینجا جایی برای ساختن، مدیریت و رشد بهتر کانال توست.</p>
+          <button class="primary-btn" id="startBtn">🚀 شروع کار</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <div>
+            <span>دسترسی سریع</span>
+            <h2>چه کاری می‌خواهی انجام دهی؟</h2>
+          </div>
+        </div>
+
+        <div class="quick-grid">
+          <button class="feature-card" data-page="content">
+            <span class="card-icon">📚</span>
+            <b>محتوا</b>
+            <small>مدیریت محتوا</small>
+          </button>
+
+          <button class="feature-card" data-page="tools">
+            <span class="card-icon">🛠️</span>
+            <b>ابزارها</b>
+            <small>ابزارهای کاربردی</small>
+          </button>
+
+          <button class="feature-card" data-page="lessons">
+            <span class="card-icon">🎓</span>
+            <b>آموزش‌ها</b>
+            <small>یادگیری و رشد</small>
+          </button>
+
+          <button class="feature-card" data-page="profile">
+            <span class="card-icon">👤</span>
+            <b>پروفایل</b>
+            <small>حساب کاربری</small>
+          </button>
+
+          <button class="feature-card" data-page="settings">
+            <span class="card-icon">⚙️</span>
+            <b>تنظیمات</b>
+            <small>شخصی‌سازی</small>
+          </button>
+
+          <button class="feature-card" data-page="help">
+            <span class="card-icon">❓</span>
+            <b>راهنما</b>
+            <small>کمک و پشتیبانی</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="info-card">
+          <div class="info-icon">✨</div>
+          <div>
+            <b>یک قدم تا شروع</b>
+            <p>ابزار موردنظرت را انتخاب کن و کار را شروع کن.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button class="fab" id="fabBtn" aria-label="ساخت جدید">+</button>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="home">
+        <span>⌂</span><small>خانه</small>
+      </button>
+      <button class="nav-item" data-page="tools">
+        <span>🛠</span><small>ابزارها</small>
+      </button>
+      <button class="nav-item" data-page="lessons">
+        <span>🎓</span><small>آموزش‌ها</small>
+      </button>
+      <button class="nav-item" data-page="profile">
+        <span>👤</span><small>پروفایل</small>
+      </button>
+    </nav>
+
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-head">
+        <div class="logo big">🦋</div>
+        <div>
+          <strong>PROJECT ONE</strong>
+          <span>@projectone_bot</span>
+        </div>
+        <button class="close-btn" id="closeDrawer">×</button>
+      </div>
+
+      <div class="drawer-links">
+        <button data-page="home">🏠 <span>خانه</span></button>
+        <button data-page="content">📄 <span>محتوا</span></button>
+        <button data-page="tools">🛠️ <span>ابزارها</span></button>
+        <button data-page="lessons">🎓 <span>آموزش‌ها</span></button>
+        <button data-page="profile">👤 <span>پروفایل</span></button>
+        <button data-page="settings">⚙️ <span>تنظیمات</span></button>
+        <button data-page="help">❓ <span>راهنما</span></button>
+      </div>
+    </aside>
+
+    <div class="sheet-backdrop" id="sheetBackdrop"></div>
+    <section class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-handle"></div>
+      <h3>ساخت جدید</h3>
+      <button data-action="post">📨 ساخت پست جدید</button>
+      <button data-action="text">📝 ایجاد متن</button>
+      <button data-action="schedule">📅 زمان‌بندی محتوا</button>
+      <button data-action="preview">👁️ پیش‌نمایش</button>
+      <button class="cancel" id="closeSheet">لغو</button>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
