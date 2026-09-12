@@ -17,11 +17,15 @@ const tg =
 if (tg) {
 
   tg.ready();
+
   tg.expand();
 
   try {
+
     tg.setHeaderColor('#07111f');
+
     tg.setBackgroundColor('#07111f');
+
   } catch (e) {}
 
 }
@@ -401,7 +405,7 @@ function newIdea() {
   if (!text) {
 
     alert(
-      '⚠️ ایده خالی است.'
+      '⚠️ ایده خالی است'
     );
 
     return;
@@ -413,6 +417,21 @@ function newIdea() {
     getIdeas();
 
 
+  const user =
+    tg &&
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user
+      ? tg.initDataUnsafe.user
+      : null;
+
+
+  const queryId =
+    tg &&
+    tg.initDataUnsafe
+      ? tg.initDataUnsafe.query_id
+      : null;
+
+
   const newItem = {
 
     id:
@@ -422,7 +441,28 @@ function newIdea() {
       text,
 
     date:
-      new Date().toLocaleString('fa-IR')
+      new Date().toLocaleString('fa-IR'),
+
+    timestamp:
+      new Date().toISOString(),
+
+    user_id:
+      user
+        ? user.id
+        : null,
+
+    username:
+      user && user.username
+        ? user.username
+        : null,
+
+    first_name:
+      user && user.first_name
+        ? user.first_name
+        : null,
+
+    query_id:
+      queryId
 
   };
 
@@ -437,16 +477,14 @@ function newIdea() {
   if (!saved) {
 
     alert(
-      '❌ ایده ذخیره نشد.\n\n' +
-      'امکان ذخیره‌سازی در این محیط وجود ندارد.'
+      '❌ ذخیره انجام نشد\n\n' +
+      'مرورگر اجازه ذخیره اطلاعات را نمی‌دهد.'
     );
 
     return;
 
   }
 
-
-  /* آخرین ایده */
 
   try {
 
@@ -457,13 +495,16 @@ function newIdea() {
 
   } catch (error) {
 
-    console.log(error);
+    console.log(
+      'LAST IDEA SAVE ERROR:',
+      error
+    );
 
   }
 
 
   alert(
-    '✅ ایده با موفقیت ذخیره شد!\n\n' +
+    '✅ ایده با موفقیت ذخیره شد\n\n' +
     '💡 ' +
     text
   );
@@ -560,9 +601,6 @@ function showLastIdea() {
 
   }
 
-
-  /* اگر آخرین ایده نبود،
-     از لیست ایده‌ها پیدا کن */
 
   if (!lastIdea) {
 
@@ -701,6 +739,204 @@ function deleteIdeas() {
 
 
 /* =====================================
+   TELEGRAM CONNECTION TEST
+===================================== */
+
+function testTelegramConnection() {
+
+  if (!tg) {
+
+    alert(
+      '❌ Telegram WebApp در دسترس نیست.'
+    );
+
+    return;
+
+  }
+
+
+  const user =
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user
+      ? tg.initDataUnsafe.user
+      : null;
+
+
+  const queryId =
+    tg.initDataUnsafe
+      ? tg.initDataUnsafe.query_id
+      : null;
+
+
+  alert(
+
+    '✅ اتصال Telegram فعال است\n\n' +
+
+    '👤 User:\n' +
+
+    (
+      user
+        ? (
+            user.first_name ||
+            'کاربر'
+          )
+        : 'نامشخص'
+    ) +
+
+    '\n\n🔑 Query ID:\n' +
+
+    (
+      queryId
+        ? '✅ دریافت شد'
+        : '❌ دریافت نشد'
+    )
+
+  );
+
+
+  console.log(
+    'PROJECT ONE TELEGRAM USER:',
+    user
+  );
+
+
+  console.log(
+    'PROJECT ONE QUERY ID:',
+    queryId
+  );
+
+}
+
+
+/* =====================================
+   SEND IDEA TEST
+===================================== */
+
+function sendIdeaTest() {
+
+  if (!tg) {
+
+    alert(
+      '❌ Telegram WebApp در دسترس نیست'
+    );
+
+    return;
+
+  }
+
+
+  const idea =
+    prompt(
+      '💡 تست ارسال ایده\n\n' +
+      'یک ایده آزمایشی بنویس:'
+    );
+
+
+  if (idea === null) {
+
+    return;
+
+  }
+
+
+  const text =
+    idea.trim();
+
+
+  if (!text) {
+
+    alert(
+      '⚠️ ایده خالی است'
+    );
+
+    return;
+
+  }
+
+
+  const user =
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user
+      ? tg.initDataUnsafe.user
+      : null;
+
+
+  const queryId =
+    tg.initDataUnsafe
+      ? tg.initDataUnsafe.query_id
+      : null;
+
+
+  const payload = {
+
+    type:
+      'idea',
+
+    text:
+      text,
+
+    date:
+      new Date().toISOString(),
+
+    query_id:
+      queryId,
+
+    user_id:
+      user
+        ? user.id
+        : null,
+
+    username:
+      user && user.username
+        ? user.username
+        : null,
+
+    first_name:
+      user && user.first_name
+        ? user.first_name
+        : null
+
+  };
+
+
+  console.log(
+    'PROJECT ONE PAYLOAD:',
+    payload
+  );
+
+
+  alert(
+
+    '📦 اطلاعات آماده شد\n\n' +
+
+    '💡 ایده:\n' +
+    text +
+
+    '\n\n👤 کاربر:\n' +
+
+    (
+      user
+        ? (
+            user.first_name ||
+            'کاربر'
+          )
+        : 'نامشخص'
+    ) +
+
+    '\n\n🔑 Query ID:\n' +
+
+    (
+      queryId
+        ? '✅ دریافت شد'
+        : '❌ دریافت نشد'
+    )
+
+  );
+
+}
+
+
+/* =====================================
    IDEA SYSTEM TEST
 ===================================== */
 
@@ -801,6 +1037,14 @@ window.deleteIdeas =
   deleteIdeas;
 
 
+window.testTelegramConnection =
+  testTelegramConnection;
+
+
+window.sendIdeaTest =
+  sendIdeaTest;
+
+
 window.testIdeaStorage =
   testIdeaStorage;
 
@@ -818,156 +1062,12 @@ console.log(
   '💡 Idea system loaded'
 );
 
-function testTelegramConnection() {
 
-  if (!tg) {
-
-    alert(
-      '❌ Mini App داخل Telegram اجرا نشده است.'
-    );
-
-    return;
-
-  }
+console.log(
+  '🔌 Telegram connection system loaded'
+);
 
 
-  const data = {
-
-    test: true,
-
-    type: 'project_one_test',
-
-    message: 'سلام از Mini App PROJECT ONE',
-
-    time: new Date().toISOString(),
-
-    telegram_user:
-      tg.initDataUnsafe &&
-      tg.initDataUnsafe.user
-        ? tg.initDataUnsafe.user
-        : null,
-
-    query_id:
-      tg.initDataUnsafe
-        ? tg.initDataUnsafe.query_id
-        : null
-
-  };
-
-
-  console.log(
-    'PROJECT ONE TEST DATA:',
-    data
-  );
-
-
-  alert(
-    '✅ اتصال Telegram فعال است\n\n' +
-    'User: ' +
-    (
-      data.telegram_user
-        ? data.telegram_user.first_name
-        : 'نامشخص'
-    ) +
-    '\n\n' +
-    'Query ID: ' +
-    (
-      data.query_id
-        ? 'دریافت شد ✅'
-        : 'دریافت نشد ❌'
-    )
-  );
-
-}
-
-
-window.testTelegramConnection =
-  testTelegramConnection;
-function sendIdeaTest() {
-
-  if (!tg) {
-
-    alert('❌ Telegram WebApp در دسترس نیست');
-
-    return;
-
-  }
-
-
-  const idea = prompt(
-    '💡 تست ارسال ایده\n\n' +
-    'یک ایده آزمایشی بنویس:'
-  );
-
-
-  if (idea === null) {
-    return;
-  }
-
-
-  const text = idea.trim();
-
-
-  if (!text) {
-
-    alert('⚠️ ایده خالی است');
-
-    return;
-
-  }
-
-
-  const user =
-    tg.initDataUnsafe &&
-    tg.initDataUnsafe.user
-      ? tg.initDataUnsafe.user
-      : null;
-
-
-  const queryId =
-    tg.initDataUnsafe
-      ? tg.initDataUnsafe.query_id
-      : null;
-
-
-  const data = {
-
-    type: 'idea',
-
-    text: text,
-
-    date:
-      new Date().toISOString(),
-
-    query_id:
-      queryId,
-
-    user:
-      user
-
-  };
-
-
-  console.log(
-    'PROJECT ONE IDEA:',
-    data
-  );
-
-
-  alert(
-    '📤 ایده آماده ارسال است\n\n' +
-    '💡 ' + text +
-    '\n\n' +
-    'Query ID: ' +
-    (
-      queryId
-        ? '✅'
-        : '❌'
-    )
-  );
-
-}
-
-
-window.sendIdeaTest =
-  sendIdeaTest;
+console.log(
+  '📤 Idea payload system loaded'
+);
