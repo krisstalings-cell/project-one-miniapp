@@ -9,8 +9,7 @@
    ========================================================= */
 
 /*
-   ⚠️ URL واقعی Webhook خودت را اینجا قرار بده.
-
+https://api.telebotcreator.com/new-webhook?data=gAAAAABqpVSOnKS7uguOQtA5hg83n-l_4NOKZ21Znu9iGSlGEflUxMf1vV7VVxVsxNLCyBpI-1vXVHd3cQuAGBFRvuIMh7iYs80zOACpZRrOGR0OCy_lUsT01D_I-QYu1nbNAIueD3PoIYPYkf0m638tgsq6llktTErGbK1W_21ByWloJpwVAV8TLFvNh96mC_EXSfVd1m-3
    مثال:
    const WEBHOOK_URL = 'https://...';
 
