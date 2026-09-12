@@ -817,3 +817,69 @@ console.log(
 console.log(
   '💡 Idea system loaded'
 );
+
+function testTelegramConnection() {
+
+  if (!tg) {
+
+    alert(
+      '❌ Mini App داخل Telegram اجرا نشده است.'
+    );
+
+    return;
+
+  }
+
+
+  const data = {
+
+    test: true,
+
+    type: 'project_one_test',
+
+    message: 'سلام از Mini App PROJECT ONE',
+
+    time: new Date().toISOString(),
+
+    telegram_user:
+      tg.initDataUnsafe &&
+      tg.initDataUnsafe.user
+        ? tg.initDataUnsafe.user
+        : null,
+
+    query_id:
+      tg.initDataUnsafe
+        ? tg.initDataUnsafe.query_id
+        : null
+
+  };
+
+
+  console.log(
+    'PROJECT ONE TEST DATA:',
+    data
+  );
+
+
+  alert(
+    '✅ اتصال Telegram فعال است\n\n' +
+    'User: ' +
+    (
+      data.telegram_user
+        ? data.telegram_user.first_name
+        : 'نامشخص'
+    ) +
+    '\n\n' +
+    'Query ID: ' +
+    (
+      data.query_id
+        ? 'دریافت شد ✅'
+        : 'دریافت نشد ❌'
+    )
+  );
+
+}
+
+
+window.testTelegramConnection =
+  testTelegramConnection;
