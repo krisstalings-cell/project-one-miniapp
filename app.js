@@ -1,12 +1,12 @@
-/* =====================================
-   PROJECT ONE
-   MINI APP - APP.JS
-===================================== */
+/* =========================================================
+   PROJECT ONE — Telegram Mini App
+   app.js
+   ========================================================= */
 
 
-/* =====================================
+/* =========================================================
    TELEGRAM
-===================================== */
+   ========================================================= */
 
 const tg =
   window.Telegram && Telegram.WebApp
@@ -17,95 +17,89 @@ const tg =
 if (tg) {
 
   tg.ready();
-
   tg.expand();
 
   try {
-
     tg.setHeaderColor('#07111f');
-
     tg.setBackgroundColor('#07111f');
-
   } catch (e) {}
 
 }
 
 
-/* =====================================
-   PAGE NAVIGATION
-===================================== */
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
-let activityCount = 0;
+function showToast(message) {
 
+  const toast = document.getElementById('toast');
 
-function page(id) {
-
-  document
-    .querySelectorAll('.page')
-    .forEach(function(pageElement) {
-
-      pageElement.classList.remove('active');
-
-    });
-
-
-  const target =
-    document.getElementById(id);
-
-
-  if (target) {
-
-    target.classList.add('active');
-
+  if (!toast) {
+    alert(message);
+    return;
   }
 
+  toast.textContent = message;
+  toast.classList.add('show');
 
-  document
-    .querySelectorAll('nav button')
-    .forEach(function(button) {
-
-      button.classList.toggle(
-        'active',
-        button.dataset.p === id
-      );
-
-    });
-
-
-  activityCount++;
-
-
-  const activity =
-    document.getElementById('activity');
-
-
-  if (activity) {
-
-    activity.textContent =
-      activityCount;
-
-  }
-
-
-  window.scrollTo(0, 0);
+  setTimeout(function () {
+    toast.classList.remove('show');
+  }, 2500);
 
 }
 
 
-/* =====================================
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function showPage(pageId) {
+
+  const pages =
+    document.querySelectorAll('.page');
+
+  pages.forEach(function (page) {
+    page.classList.remove('active');
+  });
+
+  const target =
+    document.getElementById(pageId);
+
+  if (target) {
+    target.classList.add('active');
+  }
+
+  const navItems =
+    document.querySelectorAll(
+      '.bottom-nav button'
+    );
+
+  navItems.forEach(function (item) {
+    item.classList.remove('active');
+  });
+
+}
+
+
+/* =========================================================
    DRAWER
-===================================== */
+   ========================================================= */
 
-function drawer() {
+function openDrawer() {
 
-  const element =
+  const drawer =
     document.getElementById('drawer');
 
+  const overlay =
+    document.getElementById('drawerOverlay');
 
-  if (element) {
+  if (drawer) {
+    drawer.classList.add('open');
+  }
 
-    element.classList.add('show');
-
+  if (overlay) {
+    overlay.classList.add('show');
   }
 
 }
@@ -113,33 +107,34 @@ function drawer() {
 
 function closeDrawer() {
 
-  const element =
+  const drawer =
     document.getElementById('drawer');
 
+  const overlay =
+    document.getElementById('drawerOverlay');
 
-  if (element) {
+  if (drawer) {
+    drawer.classList.remove('open');
+  }
 
-    element.classList.remove('show');
-
+  if (overlay) {
+    overlay.classList.remove('show');
   }
 
 }
 
 
-/* =====================================
+/* =========================================================
    BOTTOM SHEET
-===================================== */
+   ========================================================= */
 
-function sheet() {
+function openSheet() {
 
-  const element =
-    document.getElementById('sheet');
+  const sheet =
+    document.getElementById('bottomSheet');
 
-
-  if (element) {
-
-    element.classList.add('show');
-
+  if (sheet) {
+    sheet.classList.add('open');
   }
 
 }
@@ -147,198 +142,190 @@ function sheet() {
 
 function closeSheet() {
 
-  const element =
-    document.getElementById('sheet');
+  const sheet =
+    document.getElementById('bottomSheet');
 
-
-  if (element) {
-
-    element.classList.remove('show');
-
+  if (sheet) {
+    sheet.classList.remove('open');
   }
 
 }
 
 
-/* =====================================
-   TOAST
-===================================== */
-
-let toastTimer;
-
-
-function toast(message) {
-
-  const element =
-    document.getElementById('toast');
-
-
-  if (!element) {
-
-    alert(message);
-
-    return;
-
-  }
-
-
-  element.textContent =
-    message;
-
-
-  element.classList.add('show');
-
-
-  clearTimeout(toastTimer);
-
-
-  toastTimer =
-    setTimeout(function() {
-
-      element.classList.remove('show');
-
-    }, 2200);
-
-}
-
-
-/* =====================================
+/* =========================================================
    THEME
-===================================== */
+   ========================================================= */
 
-function theme() {
+function toggleTheme() {
 
   document.body.classList.toggle('light');
 
+  const isLight =
+    document.body.classList.contains('light');
 
-  if (
-    document.body.classList.contains('light')
-  ) {
+  try {
+    localStorage.setItem(
+      'project_one_theme',
+      isLight ? 'light' : 'dark'
+    );
+  } catch (e) {}
 
-    toast('☀️ حالت روشن');
+  if (tg) {
 
-  } else {
+    try {
 
-    toast('🌙 حالت تاریک');
+      if (isLight) {
+
+        tg.setHeaderColor('#ffffff');
+        tg.setBackgroundColor('#ffffff');
+
+      } else {
+
+        tg.setHeaderColor('#07111f');
+        tg.setBackgroundColor('#07111f');
+
+      }
+
+    } catch (e) {}
 
   }
 
 }
 
 
-/* =====================================
+function loadTheme() {
+
+  let theme = 'dark';
+
+  try {
+
+    theme =
+      localStorage.getItem(
+        'project_one_theme'
+      ) || 'dark';
+
+  } catch (e) {}
+
+  if (theme === 'light') {
+    document.body.classList.add('light');
+  }
+
+}
+
+
+/* =========================================================
    TELEGRAM USER
-===================================== */
+   ========================================================= */
 
 function loadTelegramUser() {
 
-  if (
-    !tg ||
-    !tg.initDataUnsafe ||
-    !tg.initDataUnsafe.user
-  ) {
-
+  if (!tg) {
     return;
-
   }
 
-
   const user =
-    tg.initDataUnsafe.user;
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user
+      ? tg.initDataUnsafe.user
+      : null;
+
+  if (!user) {
+    return;
+  }
 
 
   const name =
-    document.getElementById('name');
+    user.first_name ||
+    'کاربر';
 
 
   const username =
-    document.getElementById('username');
+    user.username
+      ? '@' + user.username
+      : '';
 
 
-  const welcome =
-    document.getElementById('welcome');
+  const userNameElements =
+    document.querySelectorAll(
+      '[data-telegram-name]'
+    );
 
 
-  if (name) {
+  userNameElements.forEach(
+    function (element) {
 
-    name.textContent =
-      [
-        user.first_name,
-        user.last_name
-      ]
-        .filter(Boolean)
-        .join(' ')
-        || 'کاربر';
+      element.textContent =
+        name;
 
-  }
+    }
+  );
 
 
-  if (username) {
-
-    username.textContent =
-      user.username
-        ? '@' + user.username
-        : 'کاربر تلگرام';
-
-  }
+  const usernameElements =
+    document.querySelectorAll(
+      '[data-telegram-username]'
+    );
 
 
-  if (welcome) {
+  usernameElements.forEach(
+    function (element) {
 
-    welcome.textContent =
-      'خوش آمدی ' +
-      (user.first_name || 'دوست') +
-      ' 🌌';
+      element.textContent =
+        username;
 
-  }
+    }
+  );
+
+
+  const photoElements =
+    document.querySelectorAll(
+      '[data-telegram-photo]'
+    );
+
+
+  photoElements.forEach(
+    function (element) {
+
+      if (user.photo_url) {
+
+        element.src =
+          user.photo_url;
+
+      }
+
+    }
+  );
 
 }
 
 
-loadTelegramUser();
-
-
-/* =====================================
-   IDEA STORAGE
-===================================== */
+/* =========================================================
+   IDEAS — STORAGE
+   ========================================================= */
 
 function getIdeas() {
 
   try {
 
-    const saved =
+    const raw =
       localStorage.getItem(
         'project_one_ideas'
       );
 
-
-    if (!saved) {
-
+    if (!raw) {
       return [];
-
     }
-
 
     const ideas =
-      JSON.parse(saved);
-
+      JSON.parse(raw);
 
     if (!Array.isArray(ideas)) {
-
       return [];
-
     }
-
 
     return ideas;
 
-  } catch (error) {
-
-    console.log(
-      'IDEA READ ERROR:',
-      error
-    );
-
+  } catch (e) {
 
     return [];
 
@@ -347,9 +334,9 @@ function getIdeas() {
 }
 
 
-/* =====================================
+/* =========================================================
    SAVE IDEAS
-===================================== */
+   ========================================================= */
 
 function saveIdeas(ideas) {
 
@@ -360,16 +347,11 @@ function saveIdeas(ideas) {
       JSON.stringify(ideas)
     );
 
-
     return true;
 
-  } catch (error) {
+  } catch (e) {
 
-    console.log(
-      'IDEA SAVE ERROR:',
-      error
-    );
-
+    console.log(e);
 
     return false;
 
@@ -378,23 +360,20 @@ function saveIdeas(ideas) {
 }
 
 
-/* =====================================
+/* =========================================================
    NEW IDEA
-===================================== */
+   ========================================================= */
 
 function newIdea() {
 
   const idea =
     prompt(
-      '💡 ایده جدید\n\n' +
-      'ایده خودت را بنویس:'
+      '💡 ایده جدید\n\nایده خودت را بنویس:'
     );
 
 
   if (idea === null) {
-
     return;
-
   }
 
 
@@ -417,57 +396,18 @@ function newIdea() {
     getIdeas();
 
 
-  const user =
-    tg &&
-    tg.initDataUnsafe &&
-    tg.initDataUnsafe.user
-      ? tg.initDataUnsafe.user
-      : null;
+  const item = {
 
-
-  const queryId =
-    tg &&
-    tg.initDataUnsafe
-      ? tg.initDataUnsafe.query_id
-      : null;
-
-
-  const newItem = {
-
-    id:
-      Date.now(),
-
-    text:
-      text,
+    text: text,
 
     date:
-      new Date().toLocaleString('fa-IR'),
-
-    timestamp:
-      new Date().toISOString(),
-
-    user_id:
-      user
-        ? user.id
-        : null,
-
-    username:
-      user && user.username
-        ? user.username
-        : null,
-
-    first_name:
-      user && user.first_name
-        ? user.first_name
-        : null,
-
-    query_id:
-      queryId
+      new Date()
+        .toLocaleString('fa-IR')
 
   };
 
 
-  ideas.push(newItem);
+  ideas.push(item);
 
 
   const saved =
@@ -493,34 +433,20 @@ function newIdea() {
       text
     );
 
-  } catch (error) {
-
-    console.log(
-      'LAST IDEA SAVE ERROR:',
-      error
-    );
-
-  }
+  } catch (e) {}
 
 
   alert(
     '✅ ایده با موفقیت ذخیره شد\n\n' +
-    '💡 ' +
-    text
-  );
-
-
-  console.log(
-    'PROJECT ONE IDEA SAVED:',
-    newItem
+    '💡 ' + text
   );
 
 }
 
 
-/* =====================================
+/* =========================================================
    SHOW ALL IDEAS
-===================================== */
+   ========================================================= */
 
 function showIdeas() {
 
@@ -531,7 +457,7 @@ function showIdeas() {
   if (ideas.length === 0) {
 
     alert(
-      '💡 هنوز هیچ ایده‌ای ثبت نشده است.'
+      '📭 هنوز هیچ ایده‌ای ثبت نشده است.'
     );
 
     return;
@@ -539,53 +465,47 @@ function showIdeas() {
   }
 
 
-  let output =
+  let text =
     '💡 ایده‌های PROJECT ONE\n\n';
 
 
   ideas.forEach(
-    function(idea, index) {
+    function (idea, index) {
 
-      if (
-        typeof idea === 'object' &&
-        idea !== null
-      ) {
+      text +=
+        (index + 1) +
+        '. ' +
+        idea.text +
+        '\n';
 
-        output +=
-          (index + 1) +
-          '. ' +
-          idea.text +
-          '\n' +
-          '🕐 ' +
-          (idea.date || '') +
-          '\n\n';
+      if (idea.date) {
 
-      } else {
-
-        output +=
-          (index + 1) +
-          '. ' +
-          idea +
-          '\n\n';
+        text +=
+          '🕒 ' +
+          idea.date +
+          '\n';
 
       }
+
+      text +=
+        '\n';
 
     }
   );
 
 
-  alert(output);
+  alert(text);
 
 }
 
 
-/* =====================================
+/* =========================================================
    SHOW LAST IDEA
-===================================== */
+   ========================================================= */
 
 function showLastIdea() {
 
-  let lastIdea = null;
+  let lastIdea = '';
 
 
   try {
@@ -593,13 +513,9 @@ function showLastIdea() {
     lastIdea =
       localStorage.getItem(
         'project_one_last_idea'
-      );
+      ) || '';
 
-  } catch (error) {
-
-    console.log(error);
-
-  }
+  } catch (e) {}
 
 
   if (!lastIdea) {
@@ -607,27 +523,10 @@ function showLastIdea() {
     const ideas =
       getIdeas();
 
-
     if (ideas.length > 0) {
 
-      const last =
-        ideas[ideas.length - 1];
-
-
-      if (
-        typeof last === 'object' &&
-        last !== null
-      ) {
-
-        lastIdea =
-          last.text;
-
-      } else {
-
-        lastIdea =
-          last;
-
-      }
+      lastIdea =
+        ideas[ideas.length - 1].text;
 
     }
 
@@ -637,7 +536,7 @@ function showLastIdea() {
   if (!lastIdea) {
 
     alert(
-      '💡 هنوز هیچ ایده‌ای ثبت نشده است.'
+      '📭 هنوز ایده‌ای ثبت نشده است.'
     );
 
     return;
@@ -646,16 +545,16 @@ function showLastIdea() {
 
 
   alert(
-    '💡 آخرین ایده PROJECT ONE\n\n' +
+    '💡 آخرین ایده:\n\n' +
     lastIdea
   );
 
 }
 
 
-/* =====================================
+/* =========================================================
    IDEA COUNT
-===================================== */
+   ========================================================= */
 
 function ideaCount() {
 
@@ -664,46 +563,27 @@ function ideaCount() {
 
 
   alert(
-    '📊 تعداد ایده‌های PROJECT ONE:\n\n' +
+    '💡 تعداد ایده‌ها:\n\n' +
     ideas.length
   );
 
 }
 
 
-/* =====================================
-   DELETE ALL IDEAS
-===================================== */
+/* =========================================================
+   DELETE IDEAS
+   ========================================================= */
 
 function deleteIdeas() {
 
-  const ideas =
-    getIdeas();
-
-
-  if (ideas.length === 0) {
-
-    alert(
-      '💡 لیست ایده‌ها خالی است.'
-    );
-
-    return;
-
-  }
-
-
-  const confirmed =
+  const confirmDelete =
     confirm(
-      '⚠️ هشدار\n\n' +
-      'آیا مطمئنی می‌خواهی ' +
-      'همه ایده‌ها حذف شوند؟'
+      '⚠️ آیا مطمئنی می‌خواهی تمام ایده‌ها حذف شوند؟'
     );
 
 
-  if (!confirmed) {
-
+  if (!confirmDelete) {
     return;
-
   }
 
 
@@ -713,34 +593,78 @@ function deleteIdeas() {
       'project_one_ideas'
     );
 
-
     localStorage.removeItem(
       'project_one_last_idea'
     );
 
-  } catch (error) {
-
-    alert(
-      '❌ حذف انجام نشد.'
-    );
-
-    console.log(error);
-
-    return;
-
-  }
+  } catch (e) {}
 
 
   alert(
-    '🗑️ همه ایده‌ها حذف شدند.'
+    '🗑 تمام ایده‌ها حذف شدند.'
   );
 
 }
 
 
-/* =====================================
-   TELEGRAM CONNECTION TEST
-===================================== */
+/* =========================================================
+   TEST IDEA STORAGE
+   ========================================================= */
+
+function testIdeaStorage() {
+
+  const test =
+    'تست ذخیره PROJECT ONE';
+
+
+  try {
+
+    localStorage.setItem(
+      'project_one_test',
+      test
+    );
+
+
+    const result =
+      localStorage.getItem(
+        'project_one_test'
+      );
+
+
+    if (result === test) {
+
+      alert(
+        '✅ سیستم ذخیره‌سازی سالم است.'
+      );
+
+    } else {
+
+      alert(
+        '❌ ذخیره‌سازی مشکل دارد.'
+      );
+
+    }
+
+
+    localStorage.removeItem(
+      'project_one_test'
+    );
+
+
+  } catch (e) {
+
+    alert(
+      '❌ مرورگر اجازه ذخیره اطلاعات را نمی‌دهد.'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TEST TELEGRAM CONNECTION
+   ========================================================= */
 
 function testTelegramConnection() {
 
@@ -776,14 +700,13 @@ function testTelegramConnection() {
 
     (
       user
-        ? (
-            user.first_name ||
-            'کاربر'
-          )
+        ? (user.first_name || 'کاربر')
         : 'نامشخص'
     ) +
 
-    '\n\n🔑 Query ID:\n' +
+    '\n\n' +
+
+    '🔑 Query ID:\n' +
 
     (
       queryId
@@ -793,24 +716,12 @@ function testTelegramConnection() {
 
   );
 
-
-  console.log(
-    'PROJECT ONE TELEGRAM USER:',
-    user
-  );
-
-
-  console.log(
-    'PROJECT ONE QUERY ID:',
-    queryId
-  );
-
 }
 
 
-/* =====================================
+/* =========================================================
    SEND IDEA TEST
-===================================== */
+   ========================================================= */
 
 function sendIdeaTest() {
 
@@ -827,15 +738,13 @@ function sendIdeaTest() {
 
   const idea =
     prompt(
-      '💡 تست ارسال ایده\n\n' +
-      'یک ایده آزمایشی بنویس:'
+      '💡 ارسال ایده\n\n' +
+      'ایده خودت را بنویس:'
     );
 
 
   if (idea === null) {
-
     return;
-
   }
 
 
@@ -869,11 +778,9 @@ function sendIdeaTest() {
 
   const payload = {
 
-    type:
-      'idea',
+    type: 'idea',
 
-    text:
-      text,
+    text: text,
 
     date:
       new Date().toISOString(),
@@ -907,28 +814,29 @@ function sendIdeaTest() {
 
   alert(
 
-    '📦 اطلاعات آماده شد\n\n' +
+    '📤 ایده آماده ارسال است\n\n' +
 
-    '💡 ایده:\n' +
+    '💡 ' +
     text +
 
-    '\n\n👤 کاربر:\n' +
+    '\n\n' +
+
+    '👤 ' +
 
     (
       user
-        ? (
-            user.first_name ||
-            'کاربر'
-          )
+        ? (user.first_name || 'کاربر')
         : 'نامشخص'
     ) +
 
-    '\n\n🔑 Query ID:\n' +
+    '\n\n' +
+
+    '🔑 Query ID: ' +
 
     (
       queryId
-        ? '✅ دریافت شد'
-        : '❌ دریافت نشد'
+        ? '✅ موجود'
+        : '❌ موجود نیست'
     )
 
   );
@@ -936,48 +844,21 @@ function sendIdeaTest() {
 }
 
 
-/* =====================================
-   IDEA SYSTEM TEST
-===================================== */
+/* =========================================================
+   FAB
+   ========================================================= */
 
-function testIdeaStorage() {
+function openFab() {
 
-  const testText =
-    'تست سیستم ایده PROJECT ONE';
-
-
-  const ideas =
-    getIdeas();
-
-
-  ideas.push({
-
-    id:
-      Date.now(),
-
-    text:
-      testText,
-
-    date:
-      new Date().toLocaleString('fa-IR')
-
-  });
-
-
-  const saved =
-    saveIdeas(ideas);
-
-
-  if (saved) {
-
-    alert(
-      '✅ سیستم ذخیره ایده سالم است.'
+  const sheet =
+    document.getElementById(
+      'bottomSheet'
     );
 
-  } else {
+  if (sheet) {
 
-    alert(
-      '❌ سیستم ذخیره ایده مشکل دارد.'
+    sheet.classList.add(
+      'open'
     );
 
   }
@@ -985,89 +866,67 @@ function testIdeaStorage() {
 }
 
 
-/* =====================================
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function () {
+
+    loadTheme();
+
+    loadTelegramUser();
+
+  }
+);
+
+
+/* =========================================================
    GLOBAL FUNCTIONS
-===================================== */
-
-window.page =
-  page;
-
-
-window.drawer =
-  drawer;
-
-
-window.closeDrawer =
-  closeDrawer;
-
-
-window.sheet =
-  sheet;
-
-
-window.closeSheet =
-  closeSheet;
-
-
-window.toast =
-  toast;
-
-
-window.theme =
-  theme;
-
+   ========================================================= */
 
 window.newIdea =
   newIdea;
 
-
 window.showIdeas =
   showIdeas;
-
 
 window.showLastIdea =
   showLastIdea;
 
-
 window.ideaCount =
   ideaCount;
-
 
 window.deleteIdeas =
   deleteIdeas;
 
+window.testIdeaStorage =
+  testIdeaStorage;
 
 window.testTelegramConnection =
   testTelegramConnection;
 
-
 window.sendIdeaTest =
   sendIdeaTest;
 
+window.showPage =
+  showPage;
 
-window.testIdeaStorage =
-  testIdeaStorage;
+window.openDrawer =
+  openDrawer;
 
+window.closeDrawer =
+  closeDrawer;
 
-/* =====================================
-   APP START
-===================================== */
+window.openSheet =
+  openSheet;
 
-console.log(
-  '🚀 PROJECT ONE Mini App loaded'
-);
+window.closeSheet =
+  closeSheet;
 
+window.toggleTheme =
+  toggleTheme;
 
-console.log(
-  '💡 Idea system loaded'
-);
-
-
-console.log(
-  '🔌 Telegram connection system loaded'
-);
-
-
-console.log(
-  '📤 Idea payload system loaded'
-);
+window.openFab =
+  openFab;
