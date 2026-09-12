@@ -5,6 +5,22 @@
 
 
 /* =========================================================
+   CONFIG
+   ========================================================= */
+
+/*
+   ⚠️ URL واقعی Webhook خودت را اینجا قرار بده.
+
+   مثال:
+   const WEBHOOK_URL = 'https://...';
+
+   این URL را در چت برای کسی ارسال نکن.
+*/
+
+const WEBHOOK_URL = 'PASTE_YOUR_WEBHOOK_URL_HERE';
+
+
+/* =========================================================
    TELEGRAM
    ========================================================= */
 
@@ -20,8 +36,10 @@ if (tg) {
   tg.expand();
 
   try {
+
     tg.setHeaderColor('#07111f');
     tg.setBackgroundColor('#07111f');
+
   } catch (e) {}
 
 }
@@ -33,18 +51,25 @@ if (tg) {
 
 function showToast(message) {
 
-  const toast = document.getElementById('toast');
+  const toast =
+    document.getElementById('toast');
 
   if (!toast) {
+
     alert(message);
     return;
+
   }
 
-  toast.textContent = message;
+  toast.textContent =
+    message;
+
   toast.classList.add('show');
 
   setTimeout(function () {
+
     toast.classList.remove('show');
+
   }, 2500);
 
 }
@@ -59,24 +84,35 @@ function showPage(pageId) {
   const pages =
     document.querySelectorAll('.page');
 
+
   pages.forEach(function (page) {
+
     page.classList.remove('active');
+
   });
+
 
   const target =
     document.getElementById(pageId);
 
+
   if (target) {
+
     target.classList.add('active');
+
   }
+
 
   const navItems =
     document.querySelectorAll(
       '.bottom-nav button'
     );
 
+
   navItems.forEach(function (item) {
+
     item.classList.remove('active');
+
   });
 
 }
@@ -94,12 +130,18 @@ function openDrawer() {
   const overlay =
     document.getElementById('drawerOverlay');
 
+
   if (drawer) {
+
     drawer.classList.add('open');
+
   }
 
+
   if (overlay) {
+
     overlay.classList.add('show');
+
   }
 
 }
@@ -113,12 +155,18 @@ function closeDrawer() {
   const overlay =
     document.getElementById('drawerOverlay');
 
+
   if (drawer) {
+
     drawer.classList.remove('open');
+
   }
 
+
   if (overlay) {
+
     overlay.classList.remove('show');
+
   }
 
 }
@@ -133,8 +181,11 @@ function openSheet() {
   const sheet =
     document.getElementById('bottomSheet');
 
+
   if (sheet) {
+
     sheet.classList.add('open');
+
   }
 
 }
@@ -145,8 +196,11 @@ function closeSheet() {
   const sheet =
     document.getElementById('bottomSheet');
 
+
   if (sheet) {
+
     sheet.classList.remove('open');
+
   }
 
 }
@@ -160,15 +214,22 @@ function toggleTheme() {
 
   document.body.classList.toggle('light');
 
+
   const isLight =
     document.body.classList.contains('light');
 
+
   try {
+
     localStorage.setItem(
       'project_one_theme',
-      isLight ? 'light' : 'dark'
+      isLight
+        ? 'light'
+        : 'dark'
     );
+
   } catch (e) {}
+
 
   if (tg) {
 
@@ -197,6 +258,7 @@ function loadTheme() {
 
   let theme = 'dark';
 
+
   try {
 
     theme =
@@ -206,8 +268,11 @@ function loadTheme() {
 
   } catch (e) {}
 
+
   if (theme === 'light') {
+
     document.body.classList.add('light');
+
   }
 
 }
@@ -223,11 +288,13 @@ function loadTelegramUser() {
     return;
   }
 
+
   const user =
     tg.initDataUnsafe &&
     tg.initDataUnsafe.user
       ? tg.initDataUnsafe.user
       : null;
+
 
   if (!user) {
     return;
@@ -312,16 +379,20 @@ function getIdeas() {
         'project_one_ideas'
       );
 
+
     if (!raw) {
       return [];
     }
 
+
     const ideas =
       JSON.parse(raw);
+
 
     if (!Array.isArray(ideas)) {
       return [];
     }
+
 
     return ideas;
 
@@ -346,6 +417,7 @@ function saveIdeas(ideas) {
       'project_one_ideas',
       JSON.stringify(ideas)
     );
+
 
     return true;
 
@@ -437,8 +509,10 @@ function newIdea() {
 
 
   alert(
+
     '✅ ایده با موفقیت ذخیره شد\n\n' +
     '💡 ' + text
+
   );
 
 }
@@ -478,6 +552,7 @@ function showIdeas() {
         idea.text +
         '\n';
 
+
       if (idea.date) {
 
         text +=
@@ -486,6 +561,7 @@ function showIdeas() {
           '\n';
 
       }
+
 
       text +=
         '\n';
@@ -522,6 +598,7 @@ function showLastIdea() {
 
     const ideas =
       getIdeas();
+
 
     if (ideas.length > 0) {
 
@@ -563,8 +640,10 @@ function ideaCount() {
 
 
   alert(
+
     '💡 تعداد ایده‌ها:\n\n' +
     ideas.length
+
   );
 
 }
@@ -592,6 +671,7 @@ function deleteIdeas() {
     localStorage.removeItem(
       'project_one_ideas'
     );
+
 
     localStorage.removeItem(
       'project_one_last_idea'
@@ -700,7 +780,10 @@ function testTelegramConnection() {
 
     (
       user
-        ? (user.first_name || 'کاربر')
+        ? (
+            user.first_name ||
+            'کاربر'
+          )
         : 'نامشخص'
     ) +
 
@@ -720,10 +803,10 @@ function testTelegramConnection() {
 
 
 /* =========================================================
-   SEND IDEA TEST
+   SEND IDEA TO WEBHOOK
    ========================================================= */
 
-function sendIdeaTest() {
+async function sendIdeaTest() {
 
   if (!tg) {
 
@@ -736,10 +819,35 @@ function sendIdeaTest() {
   }
 
 
+  if (
+    !WEBHOOK_URL ||
+    WEBHOOK_URL ===
+      'PASTE_YOUR_WEBHOOK_URL_HERE'
+  ) {
+
+    alert(
+
+      '⚠️ Webhook URL هنوز وارد نشده است.\n\n' +
+
+      'در ابتدای app.js مقدار\n' +
+
+      'WEBHOOK_URL\n' +
+
+      'را تنظیم کن.'
+
+    );
+
+    return;
+
+  }
+
+
   const idea =
     prompt(
+
       '💡 ارسال ایده\n\n' +
       'ایده خودت را بنویس:'
+
     );
 
 
@@ -813,33 +921,103 @@ function sendIdeaTest() {
 
 
   alert(
-
-    '📤 ایده آماده ارسال است\n\n' +
-
-    '💡 ' +
-    text +
-
-    '\n\n' +
-
-    '👤 ' +
-
-    (
-      user
-        ? (user.first_name || 'کاربر')
-        : 'نامشخص'
-    ) +
-
-    '\n\n' +
-
-    '🔑 Query ID: ' +
-
-    (
-      queryId
-        ? '✅ موجود'
-        : '❌ موجود نیست'
-    )
-
+    '📤 در حال ارسال ایده...'
   );
+
+
+  try {
+
+    const response =
+      await fetch(
+        WEBHOOK_URL,
+        {
+
+          method: 'POST',
+
+          headers: {
+
+            'Content-Type':
+              'application/json'
+
+          },
+
+          body:
+            JSON.stringify(payload)
+
+        }
+      );
+
+
+    const responseText =
+      await response.text();
+
+
+    console.log(
+      'PROJECT ONE WEBHOOK RESPONSE:',
+      responseText
+    );
+
+
+    if (response.ok) {
+
+      alert(
+
+        '✅ ایده ارسال شد\n\n' +
+
+        '💡 ' +
+        text +
+
+        '\n\n' +
+
+        '🤖 پاسخ Webhook:\n' +
+
+        (
+          responseText ||
+          'دریافت شد'
+        )
+
+      );
+
+
+    } else {
+
+      alert(
+
+        '❌ ارسال ناموفق بود\n\n' +
+
+        'HTTP: ' +
+        response.status +
+
+        '\n\n' +
+
+        responseText
+
+      );
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      'PROJECT ONE WEBHOOK ERROR:',
+      error
+    );
+
+
+    alert(
+
+      '❌ اتصال به Webhook برقرار نشد.\n\n' +
+
+      'ممکن است Webhook اجازه درخواست مستقیم از GitHub Pages را ندهد.\n\n' +
+
+      'خطا:\n' +
+
+      error.message
+
+    );
+
+  }
 
 }
 
@@ -854,6 +1032,7 @@ function openFab() {
     document.getElementById(
       'bottomSheet'
     );
+
 
   if (sheet) {
 
