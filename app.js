@@ -9,14 +9,15 @@
    ========================================================= */
 
 /*
-https://api.telebotcreator.com/new-webhook?data=gAAAAABqpVSOnKS7uguOQtA5hg83n-l_4NOKZ21Znu9iGSlGEflUxMf1vV7VVxVsxNLCyBpI-1vXVHd3cQuAGBFRvuIMh7iYs80zOACpZRrOGR0OCy_lUsT01D_I-QYu1nbNAIueD3PoIYPYkf0m638tgsq6llktTErGbK1W_21ByWloJpwVAV8TLFvNh96mC_EXSfVd1m-3
+   ⚠️ URL واقعی Webhook خودت را اینجا قرار بده.
+
    مثال:
    const WEBHOOK_URL = 'https://...';
 
    این URL را در چت برای کسی ارسال نکن.
 */
 
-const WEBHOOK_URL = 'PASTE_YOUR_WEBHOOK_URL_HERE';
+const WEBHOOK_URL = 'https://api.telebotcreator.com/new-webhook?data=gAAAAABqpVTl-6GZjErQswSGvcIZVB9ev16W6a47IPU1cF5oiGf2N1v95bGaeCI--GxNvo4cxXSR3Ribtic9JFaM0fDvqZRNYt9tpbDmvQX2nY8uDbwjeCntTqckwzaYLywvBq0wDowC7Puv8PK7tVqpQyIHoDUdn8VSKrdbixdnj3qYy6E0MN7ElM_s9pmaj6Dn0yL8Tylu';
 
 
 /* =========================================================
