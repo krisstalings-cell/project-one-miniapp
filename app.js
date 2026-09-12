@@ -14,8 +14,10 @@ if (tg) {
   tg.expand();
 
   try {
+
     tg.setHeaderColor('#07111f');
     tg.setBackgroundColor('#07111f');
+
   } catch (e) {}
 
 }
@@ -311,7 +313,9 @@ function newIdea() {
   }
 
 
-  /* ذخیره محلی */
+  /* =================================
+     آخرین ایده
+  ================================= */
 
   localStorage.setItem(
     'project_one_last_idea',
@@ -319,7 +323,30 @@ function newIdea() {
   );
 
 
-  /* پیام موفقیت */
+  /* =================================
+     همه ایده‌ها
+  ================================= */
+
+  const ideas =
+    JSON.parse(
+      localStorage.getItem(
+        'project_one_ideas'
+      ) || '[]'
+    );
+
+
+  ideas.push(text);
+
+
+  localStorage.setItem(
+    'project_one_ideas',
+    JSON.stringify(ideas)
+  );
+
+
+  /* =================================
+     موفقیت
+  ================================= */
 
   alert(
     '✅ ایده ثبت شد\n\n' +
@@ -331,6 +358,57 @@ function newIdea() {
     'PROJECT ONE IDEA:',
     text
   );
+
+}
+
+
+/* =====================================
+   SHOW ALL IDEAS
+===================================== */
+
+function showIdeas() {
+
+  const ideas =
+    JSON.parse(
+      localStorage.getItem(
+        'project_one_ideas'
+      ) || '[]'
+    );
+
+
+  /* هیچ ایده‌ای وجود ندارد */
+
+  if (ideas.length === 0) {
+
+    alert(
+      '💡 هنوز هیچ ایده‌ای ثبت نشده است.'
+    );
+
+    return;
+
+  }
+
+
+  /* عنوان */
+
+  let text =
+    '💡 ایده‌های PROJECT ONE\n\n';
+
+
+  /* ساخت فهرست */
+
+  ideas.forEach(function(idea, index) {
+
+    text +=
+      (index + 1) +
+      '. ' +
+      idea +
+      '\n\n';
+
+  });
+
+
+  alert(text);
 
 }
 
@@ -361,6 +439,83 @@ function showLastIdea() {
   alert(
     '💡 آخرین ایده PROJECT ONE:\n\n' +
     idea
+  );
+
+}
+
+
+/* =====================================
+   DELETE ALL IDEAS
+===================================== */
+
+function deleteIdeas() {
+
+  const ideas =
+    JSON.parse(
+      localStorage.getItem(
+        'project_one_ideas'
+      ) || '[]'
+    );
+
+
+  if (ideas.length === 0) {
+
+    alert(
+      '💡 لیست ایده‌ها خالی است.'
+    );
+
+    return;
+
+  }
+
+
+  const confirmDelete =
+    confirm(
+      '⚠️ آیا مطمئنی می‌خواهی همه ایده‌ها حذف شوند؟'
+    );
+
+
+  if (!confirmDelete) {
+
+    return;
+
+  }
+
+
+  localStorage.removeItem(
+    'project_one_ideas'
+  );
+
+
+  localStorage.removeItem(
+    'project_one_last_idea'
+  );
+
+
+  alert(
+    '🗑️ همه ایده‌ها حذف شدند.'
+  );
+
+}
+
+
+/* =====================================
+   IDEA COUNT
+===================================== */
+
+function ideaCount() {
+
+  const ideas =
+    JSON.parse(
+      localStorage.getItem(
+        'project_one_ideas'
+      ) || '[]'
+    );
+
+
+  alert(
+    '💡 تعداد ایده‌ها: ' +
+    ideas.length
   );
 
 }
@@ -403,14 +558,30 @@ window.newIdea =
   newIdea;
 
 
+window.showIdeas =
+  showIdeas;
+
+
 window.showLastIdea =
   showLastIdea;
 
 
+window.deleteIdeas =
+  deleteIdeas;
+
+
+window.ideaCount =
+  ideaCount;
+
+
 /* =====================================
-   START
+   APP LOADED
 ===================================== */
 
 console.log(
   '🚀 PROJECT ONE Mini App loaded'
+);
+
+console.log(
+  '💡 Idea system ready'
 );
