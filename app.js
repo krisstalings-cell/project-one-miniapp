@@ -883,3 +883,91 @@ function testTelegramConnection() {
 
 window.testTelegramConnection =
   testTelegramConnection;
+function sendIdeaTest() {
+
+  if (!tg) {
+
+    alert('❌ Telegram WebApp در دسترس نیست');
+
+    return;
+
+  }
+
+
+  const idea = prompt(
+    '💡 تست ارسال ایده\n\n' +
+    'یک ایده آزمایشی بنویس:'
+  );
+
+
+  if (idea === null) {
+    return;
+  }
+
+
+  const text = idea.trim();
+
+
+  if (!text) {
+
+    alert('⚠️ ایده خالی است');
+
+    return;
+
+  }
+
+
+  const user =
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user
+      ? tg.initDataUnsafe.user
+      : null;
+
+
+  const queryId =
+    tg.initDataUnsafe
+      ? tg.initDataUnsafe.query_id
+      : null;
+
+
+  const data = {
+
+    type: 'idea',
+
+    text: text,
+
+    date:
+      new Date().toISOString(),
+
+    query_id:
+      queryId,
+
+    user:
+      user
+
+  };
+
+
+  console.log(
+    'PROJECT ONE IDEA:',
+    data
+  );
+
+
+  alert(
+    '📤 ایده آماده ارسال است\n\n' +
+    '💡 ' + text +
+    '\n\n' +
+    'Query ID: ' +
+    (
+      queryId
+        ? '✅'
+        : '❌'
+    )
+  );
+
+}
+
+
+window.sendIdeaTest =
+  sendIdeaTest;
