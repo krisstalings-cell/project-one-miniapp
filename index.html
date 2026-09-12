@@ -2,100 +2,241 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  >
 
   <title>PROJECT ONE</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
 <header>
+
   <div>
-    <b>PROJECT ONE 🦋</b>
-    <small>فضای آگاهی و تحول درونی</small>
+
+    <b>
+      PROJECT ONE 🦋
+    </b>
+
+    <small>
+      فضای آگاهی و تحول درونی
+    </small>
+
   </div>
 
-  <button onclick="drawer()">☰</button>
+
+  <button
+    type="button"
+    onclick="window.drawer()"
+  >
+    ☰
+  </button>
+
 </header>
 
 
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
 <main>
 
-  <!-- HOME -->
-  <section id="home" class="page active">
+
+  <!-- ===================================
+       HOME
+  ==================================== -->
+
+  <section
+    id="home"
+    class="page active"
+  >
+
 
     <div class="hero">
 
-      <small>PROJECT ONE International</small>
+      <small>
+        PROJECT ONE International
+      </small>
+
 
       <h1 id="welcome">
+
         خوش آمدی 🌌
+
       </h1>
 
+
       <p>
+
         اینجا نقطه شروع مسیر توست؛
         برای دیدن آنچه همین حالا هست.
+
       </p>
 
-      <button class="primary" onclick="sheet()">
+
+      <button
+        type="button"
+        class="primary"
+        onclick="window.sheet()"
+      >
+
         🚀 شروع کار
+
       </button>
 
     </div>
 
 
+
     <h2>
+
       دسترسی سریع
+
     </h2>
+
 
 
     <div class="grid">
 
-      <button class="card" onclick="page('tools')">
+
+      <button
+        type="button"
+        class="card"
+        onclick="window.page('tools')"
+      >
+
         🛠️
-        <b>ابزارها</b>
-        <small>ابزارهای مسیر</small>
+
+        <b>
+          ابزارها
+        </b>
+
+        <small>
+          ابزارهای مسیر
+        </small>
+
       </button>
 
 
-      <button class="card" onclick="page('lessons')">
+
+      <button
+        type="button"
+        class="card"
+        onclick="window.page('lessons')"
+      >
+
         📚
-        <b>آموزش‌ها</b>
-        <small>یادگیری و تمرین</small>
+
+        <b>
+          آموزش‌ها
+        </b>
+
+        <small>
+          یادگیری و تمرین
+        </small>
+
       </button>
 
 
-      <button class="card" onclick="page('profile')">
+
+      <button
+        type="button"
+        class="card"
+        onclick="window.page('profile')"
+      >
+
         👤
-        <b>پروفایل</b>
-        <small>وضعیت من</small>
+
+        <b>
+          پروفایل
+        </b>
+
+        <small>
+          وضعیت من
+        </small>
+
       </button>
 
 
-      <button class="card" onclick="page('settings')">
+
+      <button
+        type="button"
+        class="card"
+        onclick="window.page('settings')"
+      >
+
         ⚙️
-        <b>تنظیمات</b>
-        <small>شخصی‌سازی</small>
+
+        <b>
+          تنظیمات
+        </b>
+
+        <small>
+          شخصی‌سازی
+        </small>
+
       </button>
 
 
-      <button class="card" onclick="page('help')">
+
+      <button
+        type="button"
+        class="card"
+        onclick="window.page('help')"
+      >
+
         ❓
-        <b>راهنما</b>
-        <small>چطور کار می‌کند؟</small>
+
+        <b>
+          راهنما
+        </b>
+
+        <small>
+          چطور کار می‌کند؟
+        </small>
+
       </button>
 
 
-      <button class="card" onclick="sheet()">
+
+      <button
+        type="button"
+        class="card"
+        onclick="window.sheet()"
+      >
+
         ➕
-        <b>ساخت جدید</b>
-        <small>ایده یا یادداشت</small>
+
+        <b>
+          ساخت جدید
+        </b>
+
+        <small>
+          ایده یا یادداشت
+        </small>
+
       </button>
+
 
     </div>
 
@@ -103,162 +244,363 @@
 
 
 
-  <!-- TOOLS -->
-  <section id="tools" class="page">
+  <!-- ===================================
+       TOOLS
+  ==================================== -->
+
+  <section
+    id="tools"
+    class="page"
+  >
+
 
     <h1>
+
       🛠️ ابزارها
+
     </h1>
 
+
     <p>
+
       ابزارهای مسیر PROJECT ONE
+
     </p>
+
 
 
     <div class="list">
 
-      <button onclick="newIdea()">
+
+      <!-- NEW IDEA -->
+
+      <button
+        type="button"
+        onclick="window.newIdea()"
+      >
+
         💡
-        <b>ایده جدید</b>
+
+        <b>
+          ایده جدید
+        </b>
+
         ›
+
       </button>
 
 
-      <button onclick="toast('یادداشت جدید انتخاب شد')">
-        📝
-        <b>یادداشت</b>
+
+      <!-- MY IDEAS -->
+
+      <button
+        type="button"
+        onclick="window.showIdeas()"
+      >
+
+        💡
+
+        <b>
+          ایده‌های من
+        </b>
+
         ›
+
       </button>
 
 
-      <button onclick="toast('تاریخچه انتخاب شد')">
+
+      <!-- LAST IDEA -->
+
+      <button
+        type="button"
+        onclick="window.showLastIdea()"
+      >
+
         🕘
-        <b>تاریخچه</b>
+
+        <b>
+          آخرین ایده
+        </b>
+
         ›
+
       </button>
 
+
+
+      <!-- IDEA COUNT -->
+
+      <button
+        type="button"
+        onclick="window.ideaCount()"
+      >
+
+        📊
+
+        <b>
+          تعداد ایده‌ها
+        </b>
+
+        ›
+
+      </button>
+
+
+
+      <!-- DELETE -->
+
+      <button
+        type="button"
+        onclick="window.deleteIdeas()"
+      >
+
+        🗑️
+
+        <b>
+          حذف همه ایده‌ها
+        </b>
+
+        ›
+
+      </button>
+
+
+
+      <!-- NOTE -->
+
+      <button
+        type="button"
+        onclick="window.toast('📝 بخش یادداشت‌ها به‌زودی')"
+      >
+
+        📝
+
+        <b>
+          یادداشت
+        </b>
+
+        ›
+
+      </button>
+
+
     </div>
 
   </section>
 
 
 
-  <!-- LESSONS -->
-  <section id="lessons" class="page">
+  <!-- ===================================
+       LESSONS
+  ==================================== -->
+
+  <section
+    id="lessons"
+    class="page"
+  >
+
 
     <h1>
+
       📚 آموزش‌ها
+
     </h1>
 
 
+
     <div class="lesson">
 
+
       <b>
+
         01 — مشاهده بدون قضاوت
+
       </b>
 
+
       <small>
+
         شروع از چیزی که همین حالا احساس می‌کنی.
+
       </small>
+
 
     </div>
 
 
+
     <div class="lesson">
 
+
       <b>
+
         02 — شناخت الگوها
+
       </b>
 
+
       <small>
+
         دیدن تکرارها بدون جنگیدن با خود.
+
       </small>
 
+
     </div>
+
 
 
     <div class="lesson">
 
+
       <b>
+
         03 — بازگشت به خود
+
       </b>
 
+
       <small>
+
         کمتر ساختن، بیشتر دیدن.
+
       </small>
 
+
     </div>
+
 
   </section>
 
 
 
-  <!-- PROFILE -->
-  <section id="profile" class="page">
+  <!-- ===================================
+       PROFILE
+  ==================================== -->
+
+  <section
+    id="profile"
+    class="page"
+  >
+
 
     <h1>
+
       👤 پروفایل
+
     </h1>
+
 
 
     <div class="profile">
 
+
       <div class="avatar">
+
         🦋
+
       </div>
+
 
 
       <div>
 
+
         <b id="name">
+
           کاربر PROJECT ONE
+
         </b>
 
+
         <small id="username">
+
           کاربر تلگرام
+
         </small>
+
 
       </div>
 
+
     </div>
+
 
 
     <div class="stat">
 
+
       فعالیت امروز
 
+
       <b id="activity">
+
         0
+
       </b>
 
+
     </div>
+
 
   </section>
 
 
 
-  <!-- SETTINGS -->
-  <section id="settings" class="page">
+  <!-- ===================================
+       SETTINGS
+  ==================================== -->
+
+  <section
+    id="settings"
+    class="page"
+  >
+
 
     <h1>
+
       ⚙️ تنظیمات
+
     </h1>
+
 
 
     <div class="list">
 
-      <button onclick="theme()">
+
+      <button
+        type="button"
+        onclick="window.theme()"
+      >
+
         🌙
-        <b>حالت نمایش</b>
+
+        <b>
+          حالت نمایش
+        </b>
+
         ›
+
       </button>
 
 
-      <button onclick="toast('زبان فارسی فعال است')">
+
+      <button
+        type="button"
+        onclick="window.toast('🌐 زبان فارسی فعال است')"
+      >
+
         🌐
-        <b>زبان: فارسی</b>
+
+        <b>
+          زبان: فارسی
+        </b>
+
         ›
+
       </button>
+
 
     </div>
 
@@ -266,162 +608,273 @@
 
 
 
-  <!-- HELP -->
-  <section id="help" class="page">
+  <!-- ===================================
+       HELP
+  ==================================== -->
+
+  <section
+    id="help"
+    class="page"
+  >
+
 
     <h1>
+
       ❓ راهنما
+
     </h1>
+
 
 
     <div class="box">
 
+
       <b>
+
         PROJECT ONE چیست؟
+
       </b>
 
+
       <p>
+
         فضایی برای ثبت ایده‌ها،
         یادگیری و مشاهده مسیر.
+
       </p>
+
 
 
       <b>
+
         از کجا شروع کنم؟
+
       </b>
 
+
       <p>
+
         از «🚀 شروع کار»
         یا بخش‌های دسترسی سریع استفاده کن.
+
       </p>
+
+
+
+      <b>
+
+        💡 ایده‌ها کجا ذخیره می‌شوند؟
+
+      </b>
+
+
+      <p>
+
+        در این مرحله ایده‌ها
+        روی همین دستگاه ذخیره می‌شوند.
+
+      </p>
+
 
     </div>
 
   </section>
+
 
 </main>
 
 
 
-<!-- BOTTOM NAVIGATION -->
+<!-- =====================================
+     BOTTOM NAVIGATION
+===================================== -->
 
 <nav>
 
+
   <button
+    type="button"
     data-p="home"
-    onclick="page('home')"
+    onclick="window.page('home')"
   >
+
     ⌂
-    <small>خانه</small>
+
+    <small>
+      خانه
+    </small>
+
   </button>
 
 
+
   <button
+    type="button"
     data-p="tools"
-    onclick="page('tools')"
+    onclick="window.page('tools')"
   >
+
     🛠️
-    <small>ابزارها</small>
+
+    <small>
+      ابزارها
+    </small>
+
   </button>
 
 
+
   <button
+    type="button"
     data-p="lessons"
-    onclick="page('lessons')"
+    onclick="window.page('lessons')"
   >
+
     📚
-    <small>آموزش</small>
+
+    <small>
+      آموزش
+    </small>
+
   </button>
+
 
 
   <button
+    type="button"
     data-p="profile"
-    onclick="page('profile')"
+    onclick="window.page('profile')"
   >
+
     👤
-    <small>پروفایل</small>
+
+    <small>
+      پروفایل
+    </small>
+
   </button>
+
 
 </nav>
 
 
 
-<!-- FAB -->
+<!-- =====================================
+     FAB
+===================================== -->
 
 <button
+  type="button"
   class="fab"
-  onclick="sheet()"
+  onclick="window.sheet()"
 >
+
   ＋
+
 </button>
 
 
 
-<!-- SIDE DRAWER -->
+<!-- =====================================
+     SIDE DRAWER
+===================================== -->
 
 <div
   id="drawer"
   class="overlay"
-  onclick="closeDrawer()"
+  onclick="window.closeDrawer()"
 >
+
 
   <aside
     onclick="event.stopPropagation()"
   >
 
+
     <button
+      type="button"
       class="x"
-      onclick="closeDrawer()"
+      onclick="window.closeDrawer()"
     >
+
       ×
+
     </button>
+
 
 
     <h2>
+
       PROJECT ONE 🦋
+
     </h2>
 
 
+
     <button
-      onclick="page('home');closeDrawer()"
+      type="button"
+      onclick="window.page('home');window.closeDrawer()"
     >
+
       🏠 خانه
+
     </button>
 
 
+
     <button
-      onclick="page('tools');closeDrawer()"
+      type="button"
+      onclick="window.page('tools');window.closeDrawer()"
     >
+
       🛠️ ابزارها
+
     </button>
 
 
+
     <button
-      onclick="page('lessons');closeDrawer()"
+      type="button"
+      onclick="window.page('lessons');window.closeDrawer()"
     >
+
       📚 آموزش‌ها
+
     </button>
 
 
+
     <button
-      onclick="page('profile');closeDrawer()"
+      type="button"
+      onclick="window.page('profile');window.closeDrawer()"
     >
+
       👤 پروفایل
+
     </button>
 
 
+
     <button
-      onclick="page('settings');closeDrawer()"
+      type="button"
+      onclick="window.page('settings');window.closeDrawer()"
     >
+
       ⚙️ تنظیمات
+
     </button>
+
 
 
     <button
-      onclick="page('help');closeDrawer()"
+      type="button"
+      onclick="window.page('help');window.closeDrawer()"
     >
+
       ❓ راهنما
+
     </button>
+
 
   </aside>
 
@@ -429,46 +882,66 @@
 
 
 
-<!-- BOTTOM SHEET -->
+<!-- =====================================
+     BOTTOM SHEET
+===================================== -->
 
 <div
   id="sheet"
   class="overlay"
-  onclick="closeSheet()"
+  onclick="window.closeSheet()"
 >
+
 
   <div
     class="bottom"
     onclick="event.stopPropagation()"
   >
 
+
     <i></i>
 
 
+
     <h2>
+
       ➕ ساخت جدید
+
     </h2>
 
 
+
     <button
-      onclick="newIdea();closeSheet()"
+      type="button"
+      onclick="window.newIdea();window.closeSheet()"
     >
+
       💡 ایده جدید
+
     </button>
 
 
+
     <button
-      onclick="toast('📝 یادداشت انتخاب شد');closeSheet()"
+      type="button"
+      onclick="window.toast('📝 یادداشت انتخاب شد');window.closeSheet()"
     >
+
       📝 یادداشت
+
     </button>
+
 
 
     <button
-      onclick="toast('🎯 هدف انتخاب شد');closeSheet()"
+      type="button"
+      onclick="window.toast('🎯 هدف انتخاب شد');window.closeSheet()"
     >
+
       🎯 هدف
+
     </button>
+
 
   </div>
 
@@ -476,15 +949,20 @@
 
 
 
-<!-- TOAST -->
+<!-- =====================================
+     TOAST
+===================================== -->
 
 <div id="toast"></div>
 
 
 
-<!-- APP JS -->
+<!-- =====================================
+     APP JS
+===================================== -->
 
 <script src="app.js"></script>
+
 
 </body>
 
