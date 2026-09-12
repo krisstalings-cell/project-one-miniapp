@@ -9,15 +9,12 @@
    ========================================================= */
 
 /*
-   ⚠️ URL واقعی Webhook خودت را اینجا قرار بده.
-
-   مثال:
-   const WEBHOOK_URL = 'https://...';
-
-   این URL را در چت برای کسی ارسال نکن.
+   ⚠️ Webhook فعلاً برای تست نگه داشته شده است.
+   بعداً روش امن‌تری برای اتصال به Backend می‌سازیم.
 */
 
-const WEBHOOK_URL = 'https://api.telebotcreator.com/new-webhook?data=gAAAAABqpVTl-6GZjErQswSGvcIZVB9ev16W6a47IPU1cF5oiGf2N1v95bGaeCI--GxNvo4cxXSR3Ribtic9JFaM0fDvqZRNYt9tpbDmvQX2nY8uDbwjeCntTqckwzaYLywvBq0wDowC7Puv8PK7tVqpQyIHoDUdn8VSKrdbixdnj3qYy6E0MN7ElM_s9pmaj6Dn0yL8Tylu';
+const WEBHOOK_URL =
+  'https://api.telebotcreator.com/new-webhook?data=gAAAAABqpVTl-6GZjErQswSGvcIZVB9ev16W6a47IPU1cF5oiGf2N1v95bGaeCI--GxNvo4cxXSR3Ribtic9JFaM0fDvqZRNYt9tpbDmvQX2nY8uDbwjeCntTqckwzaYLywvBq0wDowC7Puv8PK7tVqpQyIHoDUdn8VSKrdbixdnj3qYy6E0MN7ElM_s9pmaj6Dn0yL8Tylu';
 
 
 /* =========================================================
@@ -25,19 +22,21 @@ const WEBHOOK_URL = 'https://api.telebotcreator.com/new-webhook?data=gAAAAABqpVT
    ========================================================= */
 
 const tg =
-  window.Telegram && Telegram.WebApp
-    ? Telegram.WebApp
+  window.Telegram && window.Telegram.WebApp
+    ? window.Telegram.WebApp
     : null;
 
 
 if (tg) {
 
   tg.ready();
+
   tg.expand();
 
   try {
 
     tg.setHeaderColor('#07111f');
+
     tg.setBackgroundColor('#07111f');
 
   } catch (e) {}
@@ -57,6 +56,7 @@ function showToast(message) {
   if (!toast) {
 
     alert(message);
+
     return;
 
   }
@@ -103,9 +103,13 @@ function showPage(pageId) {
   }
 
 
+  /*
+     فعال کردن دکمه مربوط به صفحه
+  */
+
   const navItems =
     document.querySelectorAll(
-      '.bottom-nav button'
+      'nav button[data-p]'
     );
 
 
@@ -113,7 +117,24 @@ function showPage(pageId) {
 
     item.classList.remove('active');
 
+
+    if (
+      item.getAttribute('data-p') ===
+      pageId
+    ) {
+
+      item.classList.add('active');
+
+    }
+
   });
+
+
+  /*
+     اگر Drawer باز است، ببند
+  */
+
+  closeDrawer();
 
 }
 
@@ -127,20 +148,10 @@ function openDrawer() {
   const drawer =
     document.getElementById('drawer');
 
-  const overlay =
-    document.getElementById('drawerOverlay');
-
 
   if (drawer) {
 
     drawer.classList.add('open');
-
-  }
-
-
-  if (overlay) {
-
-    overlay.classList.add('show');
 
   }
 
@@ -152,20 +163,10 @@ function closeDrawer() {
   const drawer =
     document.getElementById('drawer');
 
-  const overlay =
-    document.getElementById('drawerOverlay');
-
 
   if (drawer) {
 
     drawer.classList.remove('open');
-
-  }
-
-
-  if (overlay) {
-
-    overlay.classList.remove('show');
 
   }
 
@@ -179,7 +180,7 @@ function closeDrawer() {
 function openSheet() {
 
   const sheet =
-    document.getElementById('bottomSheet');
+    document.getElementById('sheet');
 
 
   if (sheet) {
@@ -194,7 +195,7 @@ function openSheet() {
 function closeSheet() {
 
   const sheet =
-    document.getElementById('bottomSheet');
+    document.getElementById('sheet');
 
 
   if (sheet) {
@@ -238,11 +239,13 @@ function toggleTheme() {
       if (isLight) {
 
         tg.setHeaderColor('#ffffff');
+
         tg.setBackgroundColor('#ffffff');
 
       } else {
 
         tg.setHeaderColor('#07111f');
+
         tg.setBackgroundColor('#07111f');
 
       }
@@ -251,12 +254,20 @@ function toggleTheme() {
 
   }
 
+
+  showToast(
+    isLight
+      ? '☀️ حالت روشن فعال شد'
+      : '🌙 حالت تاریک فعال شد'
+  );
+
 }
 
 
 function loadTheme() {
 
-  let theme = 'dark';
+  let theme =
+    'dark';
 
 
   try {
@@ -285,7 +296,9 @@ function loadTheme() {
 function loadTelegramUser() {
 
   if (!tg) {
+
     return;
+
   }
 
 
@@ -297,7 +310,9 @@ function loadTelegramUser() {
 
 
   if (!user) {
+
     return;
+
   }
 
 
@@ -311,6 +326,10 @@ function loadTelegramUser() {
       ? '@' + user.username
       : '';
 
+
+  /*
+     عناصر احتمالی HTML
+  */
 
   const userNameElements =
     document.querySelectorAll(
@@ -363,6 +382,53 @@ function loadTelegramUser() {
     }
   );
 
+
+  /*
+     پشتیبانی از idهای فعلی HTML
+  */
+
+  const nameElement =
+    document.getElementById('name');
+
+
+  if (nameElement) {
+
+    nameElement.textContent =
+      name;
+
+  }
+
+
+  const usernameElement =
+    document.getElementById('username');
+
+
+  if (usernameElement) {
+
+    usernameElement.textContent =
+      username ||
+      'کاربر تلگرام';
+
+  }
+
+
+  /*
+     پیام خوش آمد
+  */
+
+  const welcome =
+    document.getElementById('welcome');
+
+
+  if (welcome) {
+
+    welcome.textContent =
+      'خوش آمدی ' +
+      name +
+      ' 🌌';
+
+  }
+
 }
 
 
@@ -381,7 +447,9 @@ function getIdeas() {
 
 
     if (!raw) {
+
       return [];
+
     }
 
 
@@ -390,7 +458,9 @@ function getIdeas() {
 
 
     if (!Array.isArray(ideas)) {
+
       return [];
+
     }
 
 
@@ -445,7 +515,9 @@ function newIdea() {
 
 
   if (idea === null) {
+
     return;
+
   }
 
 
@@ -470,7 +542,8 @@ function newIdea() {
 
   const item = {
 
-    text: text,
+    text:
+      text,
 
     date:
       new Date()
@@ -509,10 +582,9 @@ function newIdea() {
 
 
   alert(
-
     '✅ ایده با موفقیت ذخیره شد\n\n' +
-    '💡 ' + text
-
+    '💡 ' +
+    text
   );
 
 }
@@ -549,7 +621,10 @@ function showIdeas() {
       text +=
         (index + 1) +
         '. ' +
-        idea.text +
+        (
+          idea.text ||
+          ''
+        ) +
         '\n';
 
 
@@ -581,7 +656,8 @@ function showIdeas() {
 
 function showLastIdea() {
 
-  let lastIdea = '';
+  let lastIdea =
+    '';
 
 
   try {
@@ -603,7 +679,9 @@ function showLastIdea() {
     if (ideas.length > 0) {
 
       lastIdea =
-        ideas[ideas.length - 1].text;
+        ideas[
+          ideas.length - 1
+        ].text || '';
 
     }
 
@@ -640,10 +718,8 @@ function ideaCount() {
 
 
   alert(
-
     '💡 تعداد ایده‌ها:\n\n' +
     ideas.length
-
   );
 
 }
@@ -662,7 +738,9 @@ function deleteIdeas() {
 
 
   if (!confirmDelete) {
+
     return;
+
   }
 
 
@@ -729,7 +807,6 @@ function testIdeaStorage() {
     localStorage.removeItem(
       'project_one_test'
     );
-
 
   } catch (e) {
 
@@ -826,15 +903,7 @@ async function sendIdeaTest() {
   ) {
 
     alert(
-
-      '⚠️ Webhook URL هنوز وارد نشده است.\n\n' +
-
-      'در ابتدای app.js مقدار\n' +
-
-      'WEBHOOK_URL\n' +
-
-      'را تنظیم کن.'
-
+      '⚠️ Webhook URL تنظیم نشده است.'
     );
 
     return;
@@ -844,15 +913,15 @@ async function sendIdeaTest() {
 
   const idea =
     prompt(
-
       '💡 ارسال ایده\n\n' +
       'ایده خودت را بنویس:'
-
     );
 
 
   if (idea === null) {
+
     return;
+
   }
 
 
@@ -886,9 +955,11 @@ async function sendIdeaTest() {
 
   const payload = {
 
-    type: 'idea',
+    type:
+      'idea',
 
-    text: text,
+    text:
+      text,
 
     date:
       new Date().toISOString(),
@@ -914,12 +985,6 @@ async function sendIdeaTest() {
   };
 
 
-  console.log(
-    'PROJECT ONE PAYLOAD:',
-    payload
-  );
-
-
   alert(
     '📤 در حال ارسال ایده...'
   );
@@ -932,14 +997,14 @@ async function sendIdeaTest() {
         WEBHOOK_URL,
         {
 
-          method: 'POST',
+          method:
+            'POST',
 
-          headers: {
-
-            'Content-Type':
-              'application/json'
-
-          },
+          headers:
+            {
+              'Content-Type':
+                'application/json'
+            },
 
           body:
             JSON.stringify(payload)
@@ -950,12 +1015,6 @@ async function sendIdeaTest() {
 
     const responseText =
       await response.text();
-
-
-    console.log(
-      'PROJECT ONE WEBHOOK RESPONSE:',
-      responseText
-    );
 
 
     if (response.ok) {
@@ -977,7 +1036,6 @@ async function sendIdeaTest() {
         )
 
       );
-
 
     } else {
 
@@ -1009,8 +1067,6 @@ async function sendIdeaTest() {
 
       '❌ اتصال به Webhook برقرار نشد.\n\n' +
 
-      'ممکن است Webhook اجازه درخواست مستقیم از GitHub Pages را ندهد.\n\n' +
-
       'خطا:\n' +
 
       error.message
@@ -1028,19 +1084,7 @@ async function sendIdeaTest() {
 
 function openFab() {
 
-  const sheet =
-    document.getElementById(
-      'bottomSheet'
-    );
-
-
-  if (sheet) {
-
-    sheet.classList.add(
-      'open'
-    );
-
-  }
+  openSheet();
 
 }
 
@@ -1057,6 +1101,13 @@ document.addEventListener(
 
     loadTelegramUser();
 
+
+    /*
+       صفحه خانه به صورت پیش‌فرض فعال باشد
+    */
+
+    showPage('home');
+
   }
 );
 
@@ -1064,6 +1115,39 @@ document.addEventListener(
 /* =========================================================
    GLOBAL FUNCTIONS
    ========================================================= */
+
+/*
+   نام‌های اصلی
+*/
+
+window.showPage =
+  showPage;
+
+window.openDrawer =
+  openDrawer;
+
+window.closeDrawer =
+  closeDrawer;
+
+window.openSheet =
+  openSheet;
+
+window.closeSheet =
+  closeSheet;
+
+window.showToast =
+  showToast;
+
+window.toggleTheme =
+  toggleTheme;
+
+window.openFab =
+  openFab;
+
+
+/*
+   توابع ایده
+*/
 
 window.newIdea =
   newIdea;
@@ -1089,23 +1173,31 @@ window.testTelegramConnection =
 window.sendIdeaTest =
   sendIdeaTest;
 
-window.showPage =
+
+/* =========================================================
+   HTML COMPATIBILITY
+   ========================================================= */
+
+/*
+   index.html فعلی از این نام‌ها استفاده می‌کند.
+*/
+
+window.page =
   showPage;
 
-window.openDrawer =
+window.drawer =
   openDrawer;
 
-window.closeDrawer =
-  closeDrawer;
-
-window.openSheet =
+window.sheet =
   openSheet;
 
-window.closeSheet =
-  closeSheet;
+window.toast =
+  showToast;
 
-window.toggleTheme =
+window.theme =
   toggleTheme;
 
-window.openFab =
-  openFab;
+
+/* =========================================================
+   END
+   ========================================================= */
