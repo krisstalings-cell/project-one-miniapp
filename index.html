@@ -1,14 +1,491 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>PROJECT ONE</title><link rel="stylesheet" href="style.css"><script src="https://telegram.org/js/telegram-web-app.js"></script></head><body>
-<header><div><b>PROJECT ONE 🦋</b><small>فضای آگاهی و تحول درونی</small></div><button onclick="drawer()">☰</button></header>
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <title>PROJECT ONE</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <b>PROJECT ONE 🦋</b>
+    <small>فضای آگاهی و تحول درونی</small>
+  </div>
+
+  <button onclick="drawer()">☰</button>
+</header>
+
+
 <main>
-<section id="home" class="page active"><div class="hero"><small>PROJECT ONE International</small><h1 id="welcome">خوش آمدی 🌌</h1><p>اینجا نقطه شروع مسیر توست؛ برای دیدن آنچه همین حالا هست.</p><button class="primary" onclick="sheet()">🚀 شروع کار</button></div><h2>دسترسی سریع</h2><div class="grid">
-<button class="card" onclick="page('tools')">🛠️<b>ابزارها</b><small>ابزارهای مسیر</small></button><button class="card" onclick="page('lessons')">📚<b>آموزش‌ها</b><small>یادگیری و تمرین</small></button><button class="card" onclick="page('profile')">👤<b>پروفایل</b><small>وضعیت من</small></button><button class="card" onclick="page('settings')">⚙️<b>تنظیمات</b><small>شخصی‌سازی</small></button><button class="card" onclick="page('help')">❓<b>راهنما</b><small>چطور کار می‌کند؟</small></button><button class="card" onclick="sheet()">➕<b>ساخت جدید</b><small>ایده یا یادداشت</small></button></div></section>
-<section id="tools" class="page"><h1>🛠️ ابزارها</h1><p>ابزارهای مسیر PROJECT ONE</p><div class="list"><button onclick="toast('ایده جدید انتخاب شد')">💡 <b>ایده جدید</b> ›</button><button onclick="toast('یادداشت جدید انتخاب شد')">📝 <b>یادداشت</b> ›</button><button onclick="toast('تاریخچه انتخاب شد')">🕘 <b>تاریخچه</b> ›</button></div></section>
-<section id="lessons" class="page"><h1>📚 آموزش‌ها</h1><div class="lesson"><b>01 — مشاهده بدون قضاوت</b><small>شروع از چیزی که همین حالا احساس می‌کنی.</small></div><div class="lesson"><b>02 — شناخت الگوها</b><small>دیدن تکرارها بدون جنگیدن با خود.</small></div><div class="lesson"><b>03 — بازگشت به خود</b><small>کمتر ساختن، بیشتر دیدن.</small></div></section>
-<section id="profile" class="page"><h1>👤 پروفایل</h1><div class="profile"><div class="avatar">🦋</div><div><b id="name">کاربر PROJECT ONE</b><small id="username">کاربر تلگرام</small></div></div><div class="stat">فعالیت امروز <b id="activity">0</b></div></section>
-<section id="settings" class="page"><h1>⚙️ تنظیمات</h1><div class="list"><button onclick="theme()">🌙 <b>حالت نمایش</b> ›</button><button onclick="toast('زبان فارسی فعال است')">🌐 <b>زبان: فارسی</b> ›</button></div></section>
-<section id="help" class="page"><h1>❓ راهنما</h1><div class="box"><b>PROJECT ONE چیست؟</b><p>فضایی برای ثبت ایده‌ها، یادگیری و مشاهده مسیر.</p><b>از کجا شروع کنم؟</b><p>از «🚀 شروع کار» یا بخش‌های دسترسی سریع استفاده کن.</p></div></section>
+
+  <!-- HOME -->
+  <section id="home" class="page active">
+
+    <div class="hero">
+
+      <small>PROJECT ONE International</small>
+
+      <h1 id="welcome">
+        خوش آمدی 🌌
+      </h1>
+
+      <p>
+        اینجا نقطه شروع مسیر توست؛
+        برای دیدن آنچه همین حالا هست.
+      </p>
+
+      <button class="primary" onclick="sheet()">
+        🚀 شروع کار
+      </button>
+
+    </div>
+
+
+    <h2>
+      دسترسی سریع
+    </h2>
+
+
+    <div class="grid">
+
+      <button class="card" onclick="page('tools')">
+        🛠️
+        <b>ابزارها</b>
+        <small>ابزارهای مسیر</small>
+      </button>
+
+
+      <button class="card" onclick="page('lessons')">
+        📚
+        <b>آموزش‌ها</b>
+        <small>یادگیری و تمرین</small>
+      </button>
+
+
+      <button class="card" onclick="page('profile')">
+        👤
+        <b>پروفایل</b>
+        <small>وضعیت من</small>
+      </button>
+
+
+      <button class="card" onclick="page('settings')">
+        ⚙️
+        <b>تنظیمات</b>
+        <small>شخصی‌سازی</small>
+      </button>
+
+
+      <button class="card" onclick="page('help')">
+        ❓
+        <b>راهنما</b>
+        <small>چطور کار می‌کند؟</small>
+      </button>
+
+
+      <button class="card" onclick="sheet()">
+        ➕
+        <b>ساخت جدید</b>
+        <small>ایده یا یادداشت</small>
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- TOOLS -->
+  <section id="tools" class="page">
+
+    <h1>
+      🛠️ ابزارها
+    </h1>
+
+    <p>
+      ابزارهای مسیر PROJECT ONE
+    </p>
+
+
+    <div class="list">
+
+      <button onclick="newIdea()">
+        💡
+        <b>ایده جدید</b>
+        ›
+      </button>
+
+
+      <button onclick="toast('یادداشت جدید انتخاب شد')">
+        📝
+        <b>یادداشت</b>
+        ›
+      </button>
+
+
+      <button onclick="toast('تاریخچه انتخاب شد')">
+        🕘
+        <b>تاریخچه</b>
+        ›
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- LESSONS -->
+  <section id="lessons" class="page">
+
+    <h1>
+      📚 آموزش‌ها
+    </h1>
+
+
+    <div class="lesson">
+
+      <b>
+        01 — مشاهده بدون قضاوت
+      </b>
+
+      <small>
+        شروع از چیزی که همین حالا احساس می‌کنی.
+      </small>
+
+    </div>
+
+
+    <div class="lesson">
+
+      <b>
+        02 — شناخت الگوها
+      </b>
+
+      <small>
+        دیدن تکرارها بدون جنگیدن با خود.
+      </small>
+
+    </div>
+
+
+    <div class="lesson">
+
+      <b>
+        03 — بازگشت به خود
+      </b>
+
+      <small>
+        کمتر ساختن، بیشتر دیدن.
+      </small>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- PROFILE -->
+  <section id="profile" class="page">
+
+    <h1>
+      👤 پروفایل
+    </h1>
+
+
+    <div class="profile">
+
+      <div class="avatar">
+        🦋
+      </div>
+
+
+      <div>
+
+        <b id="name">
+          کاربر PROJECT ONE
+        </b>
+
+        <small id="username">
+          کاربر تلگرام
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      فعالیت امروز
+
+      <b id="activity">
+        0
+      </b>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- SETTINGS -->
+  <section id="settings" class="page">
+
+    <h1>
+      ⚙️ تنظیمات
+    </h1>
+
+
+    <div class="list">
+
+      <button onclick="theme()">
+        🌙
+        <b>حالت نمایش</b>
+        ›
+      </button>
+
+
+      <button onclick="toast('زبان فارسی فعال است')">
+        🌐
+        <b>زبان: فارسی</b>
+        ›
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- HELP -->
+  <section id="help" class="page">
+
+    <h1>
+      ❓ راهنما
+    </h1>
+
+
+    <div class="box">
+
+      <b>
+        PROJECT ONE چیست؟
+      </b>
+
+      <p>
+        فضایی برای ثبت ایده‌ها،
+        یادگیری و مشاهده مسیر.
+      </p>
+
+
+      <b>
+        از کجا شروع کنم؟
+      </b>
+
+      <p>
+        از «🚀 شروع کار»
+        یا بخش‌های دسترسی سریع استفاده کن.
+      </p>
+
+    </div>
+
+  </section>
+
 </main>
-<nav><button data-p="home" onclick="page('home')">⌂<small>خانه</small></button><button data-p="tools" onclick="page('tools')">🛠️<small>ابزارها</small></button><button data-p="lessons" onclick="page('lessons')">📚<small>آموزش</small></button><button data-p="profile" onclick="page('profile')">👤<small>پروفایل</small></button></nav><button class="fab" onclick="sheet()">＋</button>
-<div id="drawer" class="overlay" onclick="closeDrawer()"><aside onclick="event.stopPropagation()"><button class="x" onclick="closeDrawer()">×</button><h2>PROJECT ONE 🦋</h2><button onclick="page('home');closeDrawer()">🏠 خانه</button><button onclick="page('tools');closeDrawer()">🛠️ ابزارها</button><button onclick="page('lessons');closeDrawer()">📚 آموزش‌ها</button><button onclick="page('profile');closeDrawer()">👤 پروفایل</button><button onclick="page('settings');closeDrawer()">⚙️ تنظیمات</button><button onclick="page('help');closeDrawer()">❓ راهنما</button></aside></div>
-<div id="sheet" class="overlay" onclick="closeSheet()"><div class="bottom" onclick="event.stopPropagation()"><i></i><h2>➕ ساخت جدید</h2><button onclick="toast('💡 ایده انتخاب شد');closeSheet()">💡 ایده جدید</button><button onclick="toast('📝 یادداشت انتخاب شد');closeSheet()">📝 یادداشت</button><button onclick="toast('🎯 هدف انتخاب شد');closeSheet()">🎯 هدف</button></div></div><div id="toast"></div><script src="app.js"></script></body></html>
+
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav>
+
+  <button
+    data-p="home"
+    onclick="page('home')"
+  >
+    ⌂
+    <small>خانه</small>
+  </button>
+
+
+  <button
+    data-p="tools"
+    onclick="page('tools')"
+  >
+    🛠️
+    <small>ابزارها</small>
+  </button>
+
+
+  <button
+    data-p="lessons"
+    onclick="page('lessons')"
+  >
+    📚
+    <small>آموزش</small>
+  </button>
+
+
+  <button
+    data-p="profile"
+    onclick="page('profile')"
+  >
+    👤
+    <small>پروفایل</small>
+  </button>
+
+</nav>
+
+
+
+<!-- FAB -->
+
+<button
+  class="fab"
+  onclick="sheet()"
+>
+  ＋
+</button>
+
+
+
+<!-- SIDE DRAWER -->
+
+<div
+  id="drawer"
+  class="overlay"
+  onclick="closeDrawer()"
+>
+
+  <aside
+    onclick="event.stopPropagation()"
+  >
+
+    <button
+      class="x"
+      onclick="closeDrawer()"
+    >
+      ×
+    </button>
+
+
+    <h2>
+      PROJECT ONE 🦋
+    </h2>
+
+
+    <button
+      onclick="page('home');closeDrawer()"
+    >
+      🏠 خانه
+    </button>
+
+
+    <button
+      onclick="page('tools');closeDrawer()"
+    >
+      🛠️ ابزارها
+    </button>
+
+
+    <button
+      onclick="page('lessons');closeDrawer()"
+    >
+      📚 آموزش‌ها
+    </button>
+
+
+    <button
+      onclick="page('profile');closeDrawer()"
+    >
+      👤 پروفایل
+    </button>
+
+
+    <button
+      onclick="page('settings');closeDrawer()"
+    >
+      ⚙️ تنظیمات
+    </button>
+
+
+    <button
+      onclick="page('help');closeDrawer()"
+    >
+      ❓ راهنما
+    </button>
+
+  </aside>
+
+</div>
+
+
+
+<!-- BOTTOM SHEET -->
+
+<div
+  id="sheet"
+  class="overlay"
+  onclick="closeSheet()"
+>
+
+  <div
+    class="bottom"
+    onclick="event.stopPropagation()"
+  >
+
+    <i></i>
+
+
+    <h2>
+      ➕ ساخت جدید
+    </h2>
+
+
+    <button
+      onclick="newIdea();closeSheet()"
+    >
+      💡 ایده جدید
+    </button>
+
+
+    <button
+      onclick="toast('📝 یادداشت انتخاب شد');closeSheet()"
+    >
+      📝 یادداشت
+    </button>
+
+
+    <button
+      onclick="toast('🎯 هدف انتخاب شد');closeSheet()"
+    >
+      🎯 هدف
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+
+<!-- APP JS -->
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
